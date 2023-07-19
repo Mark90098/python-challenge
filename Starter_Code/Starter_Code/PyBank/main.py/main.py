@@ -17,7 +17,7 @@ import csv
 import os
 
 #file_path = 'desktop/Starter_Code/Starter_Code/PyBank/Resources/budget_data.csv'
-file_path = os.path.join('desktop','Starter_Code','Starter_Code','PyBank','Resources','budget_data.csv')
+file_path = os.path.join('..','Resources','budget_data.csv')
 
 with open(file_path,'r') as cvsfile:
     csvreader = csv.reader(cvsfile, delimiter=",")
@@ -67,4 +67,4 @@ dir_path = os.path.dirname(os.path.realpath("main.py"))
 #export results into csv fil
 with open(os.path.join(dir_path, "results.csv"),"w") as export_file:
     writer = csv.writer(export_file)
-    writer.writerow(avg_change)
+    writer.writerow(avg_change)   
