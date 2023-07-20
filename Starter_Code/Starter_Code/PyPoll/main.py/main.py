@@ -17,7 +17,7 @@ canidate_list = []
 
 
 #file_path = 'desktop/Starter_Code/Starter_Code/PyBank/Resources/budget_data.csv'
-file_path = os.path.join('desktop','Starter_Code','Starter_Code','PyPoll','Resources','election_data.csv')
+file_path = os.path.join("..",'Resources','election_data.csv') #defines relative file path
 
 with open(file_path,'r') as cvsfile:
     csvreader = csv.reader(cvsfile, delimiter=",")
@@ -46,6 +46,7 @@ with open(file_path,'r') as cvsfile:
 
 #def percent(votes_can):
 
+print("Total votes:", vote_count) # print total number of votes
 
 percent0 = '{0:.2f}'.format(votes_can0/vote_count * 100) #calculates % of votes each canidate got. The 1st section specifies 2 decimal places
 percent1 = '{0:.2f}'.format(votes_can1/vote_count * 100)
@@ -55,10 +56,16 @@ percent2 = '{0:.2f}'.format(votes_can2/vote_count * 100)
 percent_list = [percent0,percent1,percent2]
 #percent_list = [f'{percent0} & "%",percent1 & "%",f'{percent2} & "%"]
 
-canidate_percent = zip(canidate_list,percent_list) #zip list to display canidates' % votes next to their name
+canidate_percent = zip(canidate_list, percent_list) #zip list to display canidates' % votes next to their name
 zipped_list = list(canidate_percent)  #need to list it again
 print("\n".join(map(str, zipped_list)))  #need this stuff to print each canidate as new line
 
+results = [['Total votes:', vote_count], [zipped_list]]
 
+#export results into csv file
+dir_path = os.path.dirname(os.path.realpath("main.py")) #this line defines current file path. The next line tells computer relative path starting from here
 
+with open(os.path.join(dir_path,"..","Analysis","results.csv"),'w') as export_file:    #open csv file 1 folder back, in analysis folder, name new csv "results". Open as write file
+    writer = csv.writer(export_file)  #tell the computer this file will be written on
+    writer.writerows(results)   #tell computer what to write into csv
 

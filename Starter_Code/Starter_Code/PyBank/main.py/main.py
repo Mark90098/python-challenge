@@ -62,9 +62,12 @@ print('Average change:', avg_change)
 print('Max profit increase:', increase_date, '  $', max_profit_increase)
 print('Max profit decrease:', decrease_date, '  $', max_profit_decrease)
 
-dir_path = os.path.dirname(os.path.realpath("main.py"))
+rows_csv = [["Financial Analysis \n----------------------------- \n"], ['Total months:',count],['Total gain/losses: $',total_losses_gains], ['Average change:', avg_change], ['Max profit increase:', increase_date, max_profit_increase], ['Max profit decrease:', decrease_date, max_profit_decrease]] #put all results into this variable to export to csv
 
-#export results into csv fil
-with open(os.path.join(dir_path, "results.csv"),"w") as export_file:
-    writer = csv.writer(export_file)
-    writer.writerow(avg_change)   
+
+#export results into csv file
+dir_path = os.path.dirname(os.path.realpath("main.py")) #this line defines current file path. The next line tells computer relative path starting from here
+
+with open(os.path.join(dir_path,"..","Analysis","results.csv"),'w') as export_file:    #open csv file 1 folder back, in analysis folder, name new csv "results". Open as write file
+    writer = csv.writer(export_file)  #tell the computer this file will be written on
+    writer.writerows(rows_csv)   #tell computer what to write into csv
